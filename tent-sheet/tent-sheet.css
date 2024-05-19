@@ -4,6 +4,8 @@ html {
 }
 
 body {
+    max-width: 800px;
+    margin: 0 auto;
     border: 1px solid #999;
     border-radius: 5px;
     padding-top: 0px;
