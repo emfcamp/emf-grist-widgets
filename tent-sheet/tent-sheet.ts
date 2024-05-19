@@ -1,3 +1,4 @@
+import '../global.css'
 import './tent-sheet.css'
 import { exampleData } from './exampleData'
 import moment from 'moment'
