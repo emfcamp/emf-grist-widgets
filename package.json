@@ -2,7 +2,9 @@
     "name": "@emfcamp/emf-grist-widgets",
     "version": "0.0.4",
     "description": "A repository of grist custom widgets that have no back-end requirements.",
-    "scripts": {},
+    "scripts": {
+        "build": "vite build"
+    },
     "type": "module",
     "devDependencies": {
         "prettier": "^3.2.5",
