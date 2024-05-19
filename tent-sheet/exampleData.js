@@ -18,7 +18,7 @@ export const exampleData = {
     "Ready_By": "2024-05-27T17:00:00.000Z",
     "Needed_Until": "2024-06-04T11:00:00.000Z",
     "Notes": "asdfasddf",
-    "Location": "52.03992,-2.378563",
+    "Location": "52.03992, -2.378563",
     "References": {
         "Area": "Main",
         "Area_m2_": "1276",

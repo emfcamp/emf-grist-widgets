@@ -2,6 +2,7 @@ import '../global.css'
 import './tent-sheet.css'
 import { exampleData } from './exampleData'
 import moment from 'moment'
+import QRCode from 'qrcode'
 
 const data = {
     count: 0,
@@ -26,7 +27,7 @@ Vue.filter('asDate', function (value) {
     }
     const date = moment.utc(value)
 
-    return date.isValid() ? date.format('MMMM DD, YYYY') : value
+    return date.isValid() ? date.format('MMMM D') : value
 })
 
 Vue.filter('mapLink', function (structure) {
@@ -77,6 +78,20 @@ function updateStructure(row) {
         }
 
         data.structure = Object.assign({}, data.structure, row)
+
+        const [lat, lon] = data.structure.Location.split(',')
+
+        QRCode.toDataURL(
+            `https://map.emfcamp.org/#17.5/${lat}/${lon}/B,P,St/m=${lat},${lon}`,
+            { errorCorrectionLevel: 'H' },
+            function (err, url) {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+                data.structure.qrcode = url
+            }
+        )
     } catch (err) {
         handleError(err)
     }

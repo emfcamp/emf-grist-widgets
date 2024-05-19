@@ -23,84 +23,82 @@
                 <template v-else> {{ status }} </template>
             </div>
             <template v-if="structure">
-                <div class="top">
-                    <div class="block">
-                        <div class="header">
-                            <h1>{{structure.Structure}}</h1>
-                        </div>
-                        <div class="info">Area: {{structure.Area}}</div>
-                        <div class="info" v-if="structure.Capacity">Capacity: {{structure.Capacity}}</div>
-                        <div class="info" v-if="structure.Area_m2_ && structure.Area_m2_ > 0">
-                            Floor area: {{structure.Area_m2_|round}}&nbsp;m<sup>2</sup>
-                        </div>
+                <h1>{{structure.Structure}}</h1>
+
+                <div class="row">
+                    <div class="attribute" v-if="structure.Capacity">
+                        <span class="name">Capacity</span>
+                        <span class="value">{{structure.Capacity}}</span>
                     </div>
-                    <table>
-                        <tr>
-                            <th>Supplier</th>
-                            <td>{{structure.Supplier}}</td>
-                        </tr>
-                        <tr>
-                            <th>Type</th>
-                            <td>{{structure.Type.Type_Variant}}</td>
-                        </tr>
-                        <tr>
-                            <th>Ready by</th>
-                            <td>{{structure.Ready_By | asDate}}</td>
-                        </tr>
-                        <tr>
-                            <th>Cleared by</th>
-                            <td>{{structure.Needed_Until | asDate}}</td>
-                        </tr>
-                    </table>
+                    <div class="attribute" v-if="structure.Area_m2_ && structure.Area_m2_ > 0">
+                        <span class="name">Floor area</span>
+                        <span class="value">{{structure.Area_m2_|round}} m<sup>2</sup></span>
+                    </div>
+                    <div class="attribute">
+                        <span class="name">Supplier</span>
+                        <span class="value">{{structure.Supplier}}</span>
+                    </div>
+                    <div class="attribute">
+                        <span class="name">Type</span>
+                        <span class="value">{{structure.Type.Type_Variant}}</span>
+                    </div>
+                    <div class="attribute">
+                        <span class="name">Ready by</span>
+                        <span class="value">{{structure.Ready_By | asDate}}</span>
+                    </div>
+                    <div class="attribute">
+                        <span class="name">Cleared by</span>
+                        <span class="value">{{structure.Needed_Until | asDate}}</span>
+                    </div>
                 </div>
 
                 <template v-if="structure.Notes">
-                    <p class="note"><strong>Notes</strong>: {{ structure.Notes }}</p>
+                    <p class="notes"><strong>Notes</strong>: {{ structure.Notes }}</p>
                 </template>
 
                 <div class="flooring" v-if="structure.Flooring_Coverage > 0">
-                    <h3>Flooring</h3>
-                    <table>
-                        <tr>
-                            <th>Flooring coverage</th>
-                            <td>
-                                {{structure.Flooring_Coverage * 100}}% ({{(structure.Flooring_Coverage *
-                                structure.Area_m2_)|round}} m<sup>2</sup>)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Flooring weeks</th>
-                            <td>
-                                {{structure.Weeks}}
-                                <div v-if="structure.Weeks == 1">(Complete by Wednesday day 0)</div>
-                            </td>
-                        </tr>
-                    </table>
+                    <h2>Flooring</h2>
+                    <div class="row">
+                    <div class="attribute">
+                        <span class="name">Flooring coverage</span>
+                        <span class="value">{{structure.Flooring_Coverage * 100}}%</span>
+                    </div>
+                    <div class="attribute">
+                        <span class="name">Flooring weeks</span>
+                        <span class="value">{{structure.Weeks}}</span>
+                    </div>
+                    </div>
                 </div>
-
-                <!--
-        <div class="map" if="structure.Location">
-        <iframe :src="structure | mapLink" width="100%" height="600px"></iframe>
-        </div>
-        -->
-
                 <div class="furniture" v-if="structure.Furniture">
-                    <h3>Furniture</h3>
+                    <h2>Furniture</h2>
                     <table>
+                        <thead>
                         <tr>
                             <th>Item</th>
                             <th>Quantity</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         <tr v-for="item in structure.Furniture">
                             <td class="money">{{ item.Item_Type }}</td>
                             <td class="number">{{ item.Item_Quantity }}</td>
                         </tr>
+                        </tbody>
                     </table>
+                </div>
+
+                <div class="qrcode" v-if="structure.qrcode">
+                    <h2>Map location</h2>
+                    <img :src="structure.qrcode" />
                 </div>
 
                 <div class="print">
                     <a href="javascript:window.print()">Print</a>
                 </div>
+
+                <footer>
+                Electromagnetic Field 2024
+                </footer>
             </template>
         </div>
     </body>
