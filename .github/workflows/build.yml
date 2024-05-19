@@ -19,7 +19,17 @@ jobs:
               run: npm ci
             - name: Build app
               run: npm run build
-            - name: Deploy to GitHub Pages
+            - name: Upload pages artifact
               uses: actions/upload-pages-artifact@v3
               with:
                   path: ./dist
+
+    deploy:
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
