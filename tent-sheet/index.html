@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>EMF Structure Sheet</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+        <script src="https://grist.orga.emfcamp.org/grist-plugin-api.js"></script>
+        <script src="tent-sheet.ts" type="module"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="status" v-if="status">
+                <template v-if="status === 'waiting'">
+                    <p>Waiting for data...</p>
+                    <ul>
+                        <li v-bind:class="[tableConnected ? 'done' : '']">
+                            I need <b>read table</b> access.
+                        </li>
+                        <li v-bind:class="[haveRows ? 'done' : '']">I need at least one row of data.</li>
+                        <li v-bind:class="[rowConnected ? 'done' : '']">I need <b>Select By</b> set.</li>
+                    </ul>
+                </template>
+                <template v-else> {{ status }} </template>
+            </div>
+            <template v-if="structure">
+                <div class="top">
+                    <div class="block">
+                        <div class="header">
+                            <h1>{{structure.Structure}}</h1>
+                        </div>
+                        <div class="info">Area: {{structure.Area}}</div>
+                        <div class="info" v-if="structure.Capacity">Capacity: {{structure.Capacity}}</div>
+                        <div class="info" v-if="structure.Area_m2_ && structure.Area_m2_ > 0">
+                            Floor area: {{structure.Area_m2_|round}}&nbsp;m<sup>2</sup>
+                        </div>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Supplier</th>
+                            <td>{{structure.Supplier}}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{structure.Type.Type_Variant}}</td>
+                        </tr>
+                        <tr>
+                            <th>Ready by</th>
+                            <td>{{structure.Ready_By | asDate}}</td>
+                        </tr>
+                        <tr>
+                            <th>Cleared by</th>
+                            <td>{{structure.Needed_Until | asDate}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <template v-if="structure.Notes">
+                    <p class="note"><strong>Notes</strong>: {{ structure.Notes }}</p>
+                </template>
+
+                <div class="flooring" v-if="structure.Flooring_Coverage > 0">
+                    <h3>Flooring</h3>
+                    <table>
+                        <tr>
+                            <th>Flooring coverage</th>
+                            <td>
+                                {{structure.Flooring_Coverage * 100}}% ({{(structure.Flooring_Coverage *
+                                structure.Area_m2_)|round}} m<sup>2</sup>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Flooring weeks</th>
+                            <td>
+                                {{structure.Weeks}}
+                                <div v-if="structure.Weeks == 1">(Complete by Wednesday day 0)</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!--
+        <div class="map" if="structure.Location">
+        <iframe :src="structure | mapLink" width="100%" height="600px"></iframe>
+        </div>
+        -->
+
+                <div class="furniture" v-if="structure.Furniture">
+                    <h3>Furniture</h3>
+                    <table>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <tr v-for="item in structure.Furniture">
+                            <td class="money">{{ item.Item_Type }}</td>
+                            <td class="number">{{ item.Item_Quantity }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="print">
+                    <a href="javascript:window.print()">Print</a>
+                </div>
+            </template>
+        </div>
+    </body>
+</html>
