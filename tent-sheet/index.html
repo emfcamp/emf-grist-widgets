@@ -40,7 +40,10 @@
                     </div>
                     <div class="attribute">
                         <span class="name">Type</span>
-                        <span class="value">{{structure.Type.Type_Variant}}</span>
+                        <span class="value"
+                            >{{structure.Type.Type_Variant}}
+                            <template v-if="structure.Units > 1">({{structure.Units}} units)</template></span
+                        >
                     </div>
                     <div class="attribute">
                         <span class="name">Ready by</span>
@@ -59,30 +62,30 @@
                 <div class="flooring" v-if="structure.Flooring_Coverage > 0">
                     <h2>Flooring</h2>
                     <div class="row">
-                    <div class="attribute">
-                        <span class="name">Flooring coverage</span>
-                        <span class="value">{{structure.Flooring_Coverage * 100}}%</span>
-                    </div>
-                    <div class="attribute">
-                        <span class="name">Flooring weeks</span>
-                        <span class="value">{{structure.Weeks}}</span>
-                    </div>
+                        <div class="attribute">
+                            <span class="name">Flooring coverage</span>
+                            <span class="value">{{structure.Flooring_Coverage * 100}}%</span>
+                        </div>
+                        <div class="attribute">
+                            <span class="name">Flooring weeks</span>
+                            <span class="value">{{structure.Weeks}}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="furniture" v-if="structure.Furniture">
                     <h2>Furniture</h2>
                     <table>
                         <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Quantity</th>
-                        </tr>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="item in structure.Furniture">
-                            <td class="money">{{ item.Item_Type }}</td>
-                            <td class="number">{{ item.Item_Quantity }}</td>
-                        </tr>
+                            <tr v-for="item in structure.Furniture">
+                                <td class="money">{{ item.Item_Type }}</td>
+                                <td class="number">{{ item.Item_Quantity }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -96,9 +99,7 @@
                     <a href="javascript:window.print()">Print</a>
                 </div>
 
-                <footer>
-                Electromagnetic Field 2024
-                </footer>
+                <footer>Electromagnetic Field 2024</footer>
             </template>
         </div>
     </body>

@@ -3,7 +3,8 @@
     "version": "0.0.4",
     "description": "A repository of grist custom widgets that have no back-end requirements.",
     "scripts": {
-        "build": "vite build"
+        "build": "vite build",
+        "start": "vite"
     },
     "type": "module",
     "devDependencies": {
