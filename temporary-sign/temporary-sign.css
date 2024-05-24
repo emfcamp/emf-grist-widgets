@@ -1,0 +1,123 @@
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    border-radius: 5px;
+    padding-top: 0px;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    padding: 4px;
+    margin-top: 0px !important;
+}
+
+#app {
+    margin: 0 auto;
+    width: 1000px;
+    height: 700px;
+    padding: 4px;
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    border-top: 1px solid #999;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: -5px;
+    margin-right: -5px;
+    padding: 5px;
+}
+
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.attribute {
+    white-space: nowrap;
+    flex: 1;
+    min-width: 50%;
+}
+
+.attribute .name {
+    font-weight: bold;
+    margin: 5px;
+}
+
+.attribute .name::after {
+    content: ':';
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    text-align: left;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f0f0f0;
+}
+
+.furniture {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 4px 10px;
+}
+
+.qrcode img {
+    display: block;
+    margin: auto;
+}
+
+
+@media print {
+    div.print {
+        display: none;
+    }
+}
+
+div.print {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+div.print a {
+    background: #c83200;
+    display: block;
+    font-size: 200%;
+    color: white;
+    text-decoration: none;
+    padding: 0.25em;
+    padding-top: 0.5em;
+    padding-right: 0.5em;
+    border-top-right-radius: 0.5em;
+    text-transform: uppercase;
+}
+
+div.print a:hover {
+    background: #4682b4;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.status {
+    padding: 4px;
+}

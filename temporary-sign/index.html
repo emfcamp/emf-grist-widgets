@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>EMF Structure Sheet</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.3/vue.min.js"></script>
+        <script src="https://grist.orga.emfcamp.org/grist-plugin-api.js"></script>
+        <script src="temporary-sign.ts" type="module"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="status" v-if="status">
+                <template v-if="status === 'waiting'">
+                    <p>Waiting for data...</p>
+                    <ul>
+                        <li v-bind:class="[tableConnected ? 'done' : '']">
+                            I need <b>read table</b> access.
+                        </li>
+                        <li v-bind:class="[haveRows ? 'done' : '']">I need at least one row of data.</li>
+                        <li v-bind:class="[rowConnected ? 'done' : '']">I need <b>Select By</b> set.</li>
+                    </ul>
+                </template>
+                <template v-else> {{ status }} </template>
+            </div>
+            <template v-if="structure">
+                <h1 :style="{fontSize: `${structure.fontSize}px` }">{{structure.Structure}}</h1>
+
+                <div class="furniture" v-if="structure.Furniture">
+                    <h2>Furniture</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in structure.Furniture">
+                                <td class="money">{{ item.Item_Type }}</td>
+                                <td class="number">{{ item.Item_Quantity }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="print">
+                    <a href="javascript:window.print()">Print</a>
+                </div>
+            </template>
+        </div>
+    </body>
+</html>
