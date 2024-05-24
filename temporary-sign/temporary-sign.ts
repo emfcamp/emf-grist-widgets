@@ -51,7 +51,23 @@ const normalizeBetweenTwoRanges = (val, minVal, maxVal, newMin, newMax) => {
 
 
 function scaleFont(words) {
-    return normalizeBetweenTwoRanges(words.length, 0, 100, 256, 10)
+    if (words.length < 10) {
+        return 256
+    }
+
+    if (words.length < 20) {
+        return 170
+    }
+
+    if (words.length < 30) {
+        return 150
+    }
+
+    if (words.length < 40) {
+        return 125
+    }
+
+    return normalizeBetweenTwoRanges(words.length, 0, 80, 256, 100)
 }
 
 function tweakUrl(url) {

@@ -23,7 +23,9 @@
                 <template v-else> {{ status }} </template>
             </div>
             <template v-if="structure">
-                <h1 :style="{fontSize: `${structure.fontSize}px` }">{{structure.Structure}}</h1>
+                <div class="name">
+                    <h1 :style="{fontSize: `${structure.fontSize}px` }">{{structure.Structure}}</h1>
+                </div>
 
                 <div class="furniture" v-if="structure.Furniture">
                     <h2>Furniture</h2>
