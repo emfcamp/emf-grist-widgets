@@ -51,20 +51,28 @@ const normalizeBetweenTwoRanges = (val, minVal, maxVal, newMin, newMax) => {
 
 
 function scaleFont(words) {
-    if (words.length < 10) {
+    if (words.length < 8) {
         return 256
     }
 
+    if (words.length < 10) {
+        return 200
+    }
+
+    if (words.length < 15) {
+        return 160
+    }
+
     if (words.length < 20) {
-        return 170
+        return 140
     }
 
     if (words.length < 30) {
-        return 150
+        return 130
     }
 
     if (words.length < 40) {
-        return 125
+        return 120
     }
 
     return normalizeBetweenTwoRanges(words.length, 0, 80, 256, 100)
